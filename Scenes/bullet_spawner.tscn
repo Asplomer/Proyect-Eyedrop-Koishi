@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhcjf75hewjcb"]
+
+[ext_resource type="Script" path="res://Scenes/spinner.gd" id="1_y0b3g"]
+[ext_resource type="PackedScene" uid="uid://ch4ctdgmv1713" path="res://Scenes/bullet.tscn" id="2_8l42d"]
+
+[node name="BulletSpawner" type="Node2D"]
+script = ExtResource("1_y0b3g")
+bulletScene = ExtResource("2_8l42d")
+shoots = 5
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(10, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+scale = Vector2(0.1, 0.1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.06
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdaxsd82rolbp"]
+
+[ext_resource type="Script" path="res://Scenes/fishing_part.gd" id="1_2n0qp"]
+[ext_resource type="Texture2D" uid="uid://3cfmgrstou3n" path="res://Sprites/Joystick promts.png" id="2_emq30"]
+[ext_resource type="Texture2D" uid="uid://bx5u07intacux" path="res://Sprites/backgroundsimple.png" id="2_qivdv"]
+[ext_resource type="Texture2D" uid="uid://b1y2pk0kyjavi" path="res://Sprites/SOMETHING2.png" id="2_uxh2r"]
+[ext_resource type="Texture2D" uid="uid://dpjqlhrcrsli8" path="res://Sprites/life_empty.png" id="4_gu0k2"]
+[ext_resource type="Texture2D" uid="uid://bjaf3jbht33ru" path="res://Sprites/life_full.png" id="5_fmjfk"]
+
+[node name="FishingPart" type="Node2D"]
+script = ExtResource("1_2n0qp")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Background2" type="Sprite2D" parent="Control"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-487, -296)
+scale = Vector2(4, 4)
+texture = ExtResource("2_qivdv")
+offset = Vector2(600, 325)
+
+[node name="Background" type="Sprite2D" parent="Control"]
+position = Vector2(599, 262)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_uxh2r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+root_node = NodePath("../..")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(556, 257)
+texture = ExtResource("2_emq30")
+hframes = 2
+vframes = 3
+
+[node name="TimerPromt" type="Timer" parent="Control"]
+autostart = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 280.0
+offset_top = 572.0
+offset_right = 3352.0
+offset_bottom = 668.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.159377, 0.240001)
+step = 0.001
+value = 50.0
+rounded = true
+texture_under = ExtResource("4_gu0k2")
+texture_progress = ExtResource("5_fmjfk")
+
+[node name="LineEdit" type="LineEdit" parent="Control"]
+offset_right = 67.0625
+offset_bottom = 31.0
+placeholder_text = "asdasd"
+
+[connection signal="timeout" from="Control/TimerPromt" to="." method="_on_timer_timeout"]
+[connection signal="value_changed" from="Control/TextureProgressBar" to="." method="_on_texture_progress_bar_value_changed"]

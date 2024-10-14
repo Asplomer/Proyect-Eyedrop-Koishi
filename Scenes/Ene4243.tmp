@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cilq8sn3wjud5"]
+
+[ext_resource type="Texture2D" uid="uid://y5gy6jsmg0x3" path="res://Sprites/Fish1.png" id="1_ipmq3"]
+[ext_resource type="PackedScene" uid="uid://bymvo7pvtjkd5" path="res://Scenes/simple_spinning_node.tscn" id="2_ko4jw"]
+[ext_resource type="PackedScene" uid="uid://bhcjf75hewjcb" path="res://Scenes/bullet_spawner.tscn" id="3_646ir"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11cau"]
+
+[node name="Enemy" type="Area2D" groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_11cau")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ipmq3")
+
+[node name="SimpleSpinning" parent="." instance=ExtResource("2_ko4jw")]
+
+[node name="BulletSpawner" parent="SimpleSpinning" instance=ExtResource("3_646ir")]
+shoots = 4
+
+[node name="SimpleSpinning2" parent="." instance=ExtResource("2_ko4jw")]
+degrees_per_second = 120.0
+
+[node name="BulletSpawner" parent="SimpleSpinning2" instance=ExtResource("3_646ir")]
+shoots = 3
+bulletsprite = "PELLET"

@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=3 uid="uid://6176je3dnlb"]
+
+[ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_5oelf"]
+[ext_resource type="PackedScene" uid="uid://cilq8sn3wjud5" path="res://Scenes/Enemy.tscn" id="1_05vnq"]
+[ext_resource type="Texture2D" uid="uid://bx5u07intacux" path="res://Sprites/backgroundsimple.png" id="2_4j1os"]
+[ext_resource type="PackedScene" uid="uid://cngxorqtaqyvp" path="res://Scenes/Heart.tscn" id="3_j1yyu"]
+[ext_resource type="Texture2D" uid="uid://dpjqlhrcrsli8" path="res://Sprites/life_empty.png" id="4_exqjp"]
+[ext_resource type="Script" path="res://Scenes/textcountdown.gd" id="4_nc1wt"]
+[ext_resource type="Texture2D" uid="uid://bjaf3jbht33ru" path="res://Sprites/life_full.png" id="5_j561t"]
+
+[sub_resource type="Animation" id="Animation_t2fpb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mr0vm"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dxpco"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ayf3"]
+_data = {
+"RESET": SubResource("Animation_t2fpb"),
+"fade_in": SubResource("Animation_mr0vm"),
+"fade_out": SubResource("Animation_dxpco")
+}
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_5oelf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Background" type="Sprite2D" parent="Control"]
+position = Vector2(-507, -316)
+scale = Vector2(4, 4)
+texture = ExtResource("2_4j1os")
+offset = Vector2(600, 325)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 163.0
+offset_top = 15.0
+offset_right = 3235.0
+offset_bottom = 111.0
+grow_horizontal = 2
+scale = Vector2(0.268642, 0.362508)
+step = 0.001
+value = 100.0
+texture_under = ExtResource("4_exqjp")
+texture_progress = ExtResource("5_j561t")
+script = ExtResource("4_nc1wt")
+
+[node name="Timer" type="Timer" parent="Control/TextureProgressBar"]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+top_level = true
+z_index = 5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -835.0
+offset_top = -660.0
+offset_right = -795.0
+offset_bottom = -620.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(118.991, 69.4185)
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_4ayf3")
+}
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_j1yyu")]
+position = Vector2(966, 249)
+
+[node name="Enemy" parent="." instance=ExtResource("1_05vnq")]
+position = Vector2(252, 266)
+
+[connection signal="timeout" from="Control/TextureProgressBar/Timer" to="." method="_on_timer_timeout"]
+[connection signal="PLAYERDEAD" from="CharacterBody2D" to="." method="_on_character_body_2d_playerdead"]

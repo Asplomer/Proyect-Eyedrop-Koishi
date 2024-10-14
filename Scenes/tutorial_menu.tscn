@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://bivbfo4gykgw3"]
+
+[ext_resource type="Script" path="res://Scenes/tutorial_menu.gd" id="1_dsysw"]
+[ext_resource type="Texture2D" uid="uid://di6xp1uljt7kb" path="res://Sprites/Petal.png" id="2_qumkw"]
+[ext_resource type="Texture2D" uid="uid://bx5u07intacux" path="res://Sprites/backgroundsimple.png" id="3_v2akt"]
+
+[node name="TutorialMenu" type="Node2D"]
+script = ExtResource("1_dsysw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CanvasLayer/Control"]
+modulate = Color(0.383705, 0.967762, 1, 1)
+position = Vector2(-2, -450)
+amount = 200
+lifetime = 8.0
+preprocess = 10.0
+speed_scale = 0.5
+randomness = 0.74
+lifetime_randomness = 0.17
+texture = ExtResource("2_qumkw")
+emission_shape = 3
+emission_rect_extents = Vector2(540, 50)
+spread = 67.14
+gravity = Vector2(0, 98)
+radial_accel_max = 25.0
+angle_min = 1.0
+angle_max = 360.0
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 281.0
+offset_top = 47.0
+offset_right = 881.0
+offset_bottom = 147.0
+text = "Fishing Part:
+Use the DIRECTIONAL KEYS or WASD for the prompts
+
+Objective: press the correct prompts to reel in the \"fish\""
+fit_content = true
+tab_size = 20
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 280.0
+offset_top = 178.0
+offset_right = 880.0
+offset_bottom = 293.0
+text = "Bullet hell part:
+Use the DIRECTIONAL KEYS or WASD for movement
+hold space bar for slower and easier to control
+
+Objective: Don't touch the bullets! Survive until the boss times out! "
+fit_content = true
+tab_size = 20
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("3_v2akt")
+offset = Vector2(600, 325)
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

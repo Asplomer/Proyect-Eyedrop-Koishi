@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bymvo7pvtjkd5"]
+
+[ext_resource type="Script" path="res://Scenes/simple_spinning.gd" id="1_i7ql3"]
+
+[node name="SimpleSpinning" type="Node2D"]
+script = ExtResource("1_i7ql3")
