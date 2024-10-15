@@ -29,6 +29,10 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = 122.0
+offset_right = 15.0
+offset_bottom = 122.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -78,6 +82,15 @@ Use the DIRECTIONAL KEYS or WASD for movement
 hold space bar for slower and easier to control
 
 Objective: Don't touch the bullets! Survive until the boss times out! "
+fit_content = true
+tab_size = 20
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 279.0
+offset_top = 301.0
+offset_right = 879.0
+offset_bottom = 416.0
+text = "Made by Ariel Plomer"
 fit_content = true
 tab_size = 20
 

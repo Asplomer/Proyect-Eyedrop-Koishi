@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdaxsd82rolbp"]
+[gd_scene load_steps=8 format=3 uid="uid://cdaxsd82rolbp"]
 
 [ext_resource type="Script" path="res://Scenes/fishing_part.gd" id="1_2n0qp"]
 [ext_resource type="Texture2D" uid="uid://3cfmgrstou3n" path="res://Sprites/Joystick promts.png" id="2_emq30"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b1y2pk0kyjavi" path="res://Sprites/SOMETHING2.png" id="2_uxh2r"]
 [ext_resource type="Texture2D" uid="uid://dpjqlhrcrsli8" path="res://Sprites/life_empty.png" id="4_gu0k2"]
 [ext_resource type="Texture2D" uid="uid://bjaf3jbht33ru" path="res://Sprites/life_full.png" id="5_fmjfk"]
+[ext_resource type="AudioStream" uid="uid://cqn116djcwlvv" path="res://Music/ScaryMusic2018-10-12_-_It_Is_Coming_-_David_Fesliyan.mp3" id="7_hdwrd"]
 
 [node name="FishingPart" type="Node2D"]
 script = ExtResource("1_2n0qp")
@@ -71,9 +72,14 @@ texture_under = ExtResource("4_gu0k2")
 texture_progress = ExtResource("5_fmjfk")
 
 [node name="LineEdit" type="LineEdit" parent="Control"]
+layout_mode = 0
 offset_right = 67.0625
 offset_bottom = 31.0
 placeholder_text = "asdasd"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_hdwrd")
+autoplay = true
 
 [connection signal="timeout" from="Control/TimerPromt" to="." method="_on_timer_timeout"]
 [connection signal="value_changed" from="Control/TextureProgressBar" to="." method="_on_texture_progress_bar_value_changed"]

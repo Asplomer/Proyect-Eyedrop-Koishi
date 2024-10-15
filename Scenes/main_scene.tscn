@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://6176je3dnlb"]
+[gd_scene load_steps=13 format=3 uid="uid://6176je3dnlb"]
 
 [ext_resource type="Script" path="res://Scenes/main_scene.gd" id="1_5oelf"]
 [ext_resource type="PackedScene" uid="uid://cilq8sn3wjud5" path="res://Scenes/Enemy.tscn" id="1_05vnq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dpjqlhrcrsli8" path="res://Sprites/life_empty.png" id="4_exqjp"]
 [ext_resource type="Script" path="res://Scenes/textcountdown.gd" id="4_nc1wt"]
 [ext_resource type="Texture2D" uid="uid://bjaf3jbht33ru" path="res://Sprites/life_full.png" id="5_j561t"]
+[ext_resource type="AudioStream" uid="uid://dwfim45ixp3vd" path="res://Music/2019-05-09_-_Escape_Chase_-_David_Fesliyan.mp3" id="8_h61cd"]
 
 [sub_resource type="Animation" id="Animation_t2fpb"]
 length = 0.001
@@ -135,6 +136,11 @@ position = Vector2(966, 249)
 
 [node name="Enemy" parent="." instance=ExtResource("1_05vnq")]
 position = Vector2(252, 266)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_h61cd")
+volume_db = -2.0
+autoplay = true
 
 [connection signal="timeout" from="Control/TextureProgressBar/Timer" to="." method="_on_timer_timeout"]
 [connection signal="PLAYERDEAD" from="CharacterBody2D" to="." method="_on_character_body_2d_playerdead"]
